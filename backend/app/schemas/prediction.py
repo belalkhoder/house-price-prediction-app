@@ -10,3 +10,6 @@ class PredictionRequest(BaseModel):
     transaction: str
     ownership: str
     facing: str
+
+class PredictionResponse(BaseModel):
+    predicted_price: float

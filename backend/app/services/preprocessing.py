@@ -1,8 +1,24 @@
 import pandas as pd
-from app.schemas.prediction import PredictionRequest
+import json
 
-def preprocess_input(data: PredictionRequest) -> pd.DataFrame:
-    input_data = data.model_dump()
-    hp = pd.DataFrame([input_data])
+def prepare_input_data(data: dict) -> pd.DataFrame:
+    df = pd.DataFrame([data])
     
-    return hp
+    df.rename(columns={
+        "location": "location_grouped",
+        "furnishing": "Furnishing",
+        "transaction": "Transaction",
+        "ownership": "Ownership",
+        "facing": "facing"
+    }, inplace=True)
+    
+    feature_columns = [
+        "carpet_area_sqft", "floor_num", "bathroom", "balcony",
+        "location_grouped", "Furnishing", "Transaction", "Ownership", "facing"
+    ]
+    
+    for col in feature_columns:
+        if col not in df.columns:
+            df[col] = "Unknown" if col in ["location_grouped", "Furnishing", "Transaction", "Ownership", "facing"] else 0
+            
+    return df[feature_columns]

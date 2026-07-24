@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PredictionForm } from '../components/PredictionForm';
 import { predictHousePrice } from '../api/predictionClient';
-import { PredictionInput } from '../types/prediction';
-
+import type { PredictionInput } from '../types/prediction';
 export const HomePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -14,7 +13,6 @@ export const HomePage: React.FC = () => {
     setErrorMessage('');
     try {
       const result = await predictHousePrice(data);
-      // بنبعت النتيجة لصفحة الـ Result عبر الـ state
       navigate('/result', { state: { result, data } });
     } catch (error) {
       console.error('Prediction failed:', error);

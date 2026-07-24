@@ -1,11 +1,13 @@
 export interface PredictionInput {
   location: string;
-  area: number;
-  floor: number;
-  bathrooms: number;
-  balconies: number;
+  carpet_area_sqft: number;
+  floor_num: number;
+  bathroom: number;
+  balcony: number;
   furnishing: string;
   transaction: string;
+  ownership: string;
+  facing: string;
 }
 
 export interface PredictionResponse {

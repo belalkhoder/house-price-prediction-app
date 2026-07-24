@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PredictionResponse, PredictionInput } from '../types/prediction';
+import type { PredictionResponse, PredictionInput } from '../types/prediction';
 
 interface LocationState {
   result: PredictionResponse;
@@ -35,17 +35,23 @@ export const ResultPage: React.FC = () => {
         <div className="bg-gray-50 p-4 rounded mb-6">
           <p className="text-gray-600">Estimated Price:</p>
           <p className="text-4xl font-extrabold text-blue-600 mt-2">
-            {result.predicted_price.toLocaleString()} {result.currency || 'EGP'}
+            {result.predicted_price.toLocaleString()} {result.currency || 'INR'}
           </p>
         </div>
+        
         <div className="text-left mb-6 border-t pt-4">
           <h3 className="font-bold mb-2 text-gray-700">Property Details:</h3>
           <p className="text-sm text-gray-600">Location: {data.location}</p>
-          <p className="text-sm text-gray-600">Area: {data.area} sq ft</p>
-          <p className="text-sm text-gray-600">Floor: {data.floor}</p>
-          <p className="text-sm text-gray-600">Bathrooms: {data.bathrooms}</p>
+          <p className="text-sm text-gray-600">Area: {data.carpet_area_sqft} sq ft</p>
+          <p className="text-sm text-gray-600">Floor: {data.floor_num}</p>
+          <p className="text-sm text-gray-600">Bathrooms: {data.bathroom}</p>
+          <p className="text-sm text-gray-600">Balcony: {data.balcony}</p>
           <p className="text-sm text-gray-600">Furnishing: {data.furnishing}</p>
+          <p className="text-sm text-gray-600">Transaction: {data.transaction}</p>
+          <p className="text-sm text-gray-600">Ownership: {data.ownership}</p>
+          <p className="text-sm text-gray-600">Facing: {data.facing}</p>
         </div>
+
         <button
           onClick={() => navigate('/')}
           className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
